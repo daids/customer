@@ -12,3 +12,4 @@
 */
 
 $app->post('/info', 'InfoController@add');
+$app->post('/active/{code}', 'UserController@active');
