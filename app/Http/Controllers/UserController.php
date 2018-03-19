@@ -38,7 +38,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $data = $request->getContent();
-        $key = env('SOFTWARE_KEY');
+        $key = env('DREVO_KEY');
         $data = \openssl_decrypt(base64_decode(trim($data)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
         $data = explode('#', $data);
 
@@ -60,7 +60,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $data = $request->getContent();
-        $key = env('SOFTWARE_KEY');
+        $key = env('DREVO_KEY');
         $data = \openssl_decrypt(base64_decode(trim($data)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
         $data = explode('#', $data);
 
