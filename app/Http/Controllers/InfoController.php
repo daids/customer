@@ -16,7 +16,7 @@ class InfoController extends Controller
     public function add(Request $request)
     {
         $data = $request->getContent();
-        $key = 'bdf6508c2c95df15';
+        $key = env('DREVO_KEY');
         $data = \openssl_decrypt(base64_decode(trim($data)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
         $data = explode('#', $data);
         if (isset($data[0])) {

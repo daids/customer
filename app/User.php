@@ -29,4 +29,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function isActive()
+    {
+        return $this->status == 'active';
+    }
+
+    public function active()
+    {
+        $this->status = 'active';
+        $this->save();
+    }
 }

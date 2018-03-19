@@ -23,7 +23,9 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-$app->withFacades();
+$app->withFacades([
+    'Illuminate\Support\Facades\Hash' => 'Hash',
+]);
 
 $app->withEloquent();
 
