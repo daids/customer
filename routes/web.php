@@ -13,3 +13,4 @@
 
 $app->post('/info', 'InfoController@add');
 $app->post('/active/{code}', 'UserController@active');
+$app->post('/user/create', 'UserController@create');
