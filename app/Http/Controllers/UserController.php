@@ -19,14 +19,16 @@ class UserController extends Controller
         //
     }
 
-    public function active($code)
+    public function active(Request $request)
     {
-        $userId = Cache::get($code);
-        $user = User::find($userId);
+        $data = $request->only(['code', 'email']);
+        $user = User::where('email', $data['email'])->first();
         if (! $user) {
             return view('user.active', ['result' => false]);
         }
-
+        if ($user->token != $data['code']) {
+            return view('user.active', ['result' => false, 'message' => '激活码不正确']);
+        }
         if ($user->isActive()) {
             return view('user.active', ['result' => false, 'message' => '账户已被激活']);
         }
@@ -42,6 +44,8 @@ class UserController extends Controller
         $data = \openssl_decrypt(base64_decode(trim($data)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
         $data = explode('#', $data);
 
+        info($data[0].'######'.$data[1]);
+
         $user = User::where('email', $data[0])->first();
         if ($user) {
             return ['result' => false, 'message' => 'user exists'];
@@ -49,11 +53,27 @@ class UserController extends Controller
 
         $user['email'] = $data[0];
         $user['password'] = Hash::make($data[1]);
+        $token = str_random(5);
         User::create([
             'email' => $data[0],
-            'password' => Hash::make($data[1])
+            'password' => Hash::make($data[1]),
+            'token' => $token
         ]);
-        //send email
+
+        $transport = (new Swift_SmtpTransport(env('MAIL_SMTP'), 465, 'ssl'))
+          ->setUsername(env('MAIL_USERNAME'))
+          ->setPassword(env('MAIL_PASSWORD'));
+
+        $mailer = new Swift_Mailer($transport);
+
+        $message = (new Swift_Message('Wellcome Register!'))
+          ->setFrom(env('MAIL_USERNAME'))
+          ->setTo($user['email'])
+          ->setBody('Here is the message itself, you active code is '.$token);
+
+        $result = $mailer->send($message);
+
+
         return ['result' => true];
     }
 
