@@ -60,19 +60,19 @@ class UserController extends Controller
             'token' => $token
         ]);
 
-        $transport = (new Swift_SmtpTransport(env('MAIL_SMTP'), 465, 'ssl'))
+        $transport = (new \Swift_SmtpTransport(env('MAIL_SMTP'), 465, 'ssl'))
           ->setUsername(env('MAIL_USERNAME'))
           ->setPassword(env('MAIL_PASSWORD'));
 
-        $mailer = new Swift_Mailer($transport);
+        $mailer = new \Swift_Mailer($transport);
 
-        $message = (new Swift_Message('Wellcome Register!'))
+        $message = (new \Swift_Message('Wellcome Register!'))
           ->setFrom(env('MAIL_USERNAME'))
           ->setTo($user['email'])
           ->setBody('Here is the message itself, you active code is '.$token);
 
         $result = $mailer->send($message);
-        
+
         return ['result' => true];
     }
 
