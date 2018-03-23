@@ -44,11 +44,11 @@ class UserController extends Controller
         $data = \openssl_decrypt(base64_decode(trim($data)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
         $data = explode('#', $data);
 
-        info($data[0].'######'.$data[1]);
+        info($data[0].'#'.$data[1]);
 
         $user = User::where('email', $data[0])->first();
         if ($user) {
-            return ['result' => false, 'message' => 'user exists'];
+            return ['result' => false, 'code' => '50001',  'message' => 'user exists'];
         }
 
         $user['email'] = $data[0];
@@ -72,8 +72,7 @@ class UserController extends Controller
           ->setBody('Here is the message itself, you active code is '.$token);
 
         $result = $mailer->send($message);
-
-
+        
         return ['result' => true];
     }
 
