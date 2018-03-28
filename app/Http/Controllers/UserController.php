@@ -80,6 +80,9 @@ class UserController extends Controller
         $data = explode('#', $data);
 
         $user = User::where('email', $data[0])->first();
+        if (! $user) {
+            return ['result' => false];
+        }
         if (Hash::check($data[1], $user['password'])) {
             return ['result' => true, 'data' => ['']];
         }
