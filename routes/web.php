@@ -12,5 +12,7 @@
 */
 
 $app->post('/info', 'InfoController@add');
-$app->post('/active/{code}', 'UserController@active');
+$app->get('/active/{code}', 'UserController@active');
 $app->post('/user/create', 'UserController@create');
+$app->post('/user/resetpassword', 'UserController@resetPassword');
+$app->post('/user/getresetpasswordtoken', 'UserController@getResetPasswordToken');
