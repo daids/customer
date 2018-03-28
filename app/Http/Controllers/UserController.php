@@ -99,7 +99,7 @@ class UserController extends Controller
         if (! $user) {
             return ['result' => false, 'message' => 'not found user'];
         }
-        $token = str_random(32);
+        $token = strtolower(str_random(5));
         $user->fill([
             'reset_token' => $token
         ])->save();
@@ -131,7 +131,7 @@ class UserController extends Controller
         if (! $user) {
             return ['result' => false, 'message' => 'not found user'];
         }
-        if ($user->reset_token == $data[2]) {
+        if ($user->reset_token != $data[2]) {
             return ['result' => false, 'message' => 'error token'];
         }
         $user->fill(['password' => Hash::make($data[1])])->save();
