@@ -19,3 +19,4 @@ $app->post('/user/getresetpasswordtoken', 'UserController@getResetPasswordToken'
 $app->post('/user/login', 'UserController@login');
 
 $app->post('/user/file', 'UserController@uploadFile');
+$app->get('/user/file/{name}', 'UserController@file');
