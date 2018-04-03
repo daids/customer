@@ -174,6 +174,6 @@ class UserController extends Controller
             return ['result' => false];
         }
 
-        return response()->file(storage_path('userfiles').'/'.$filename);
+        return response()->download(storage_path('userfiles').'/'.$filename);
     }
 }
