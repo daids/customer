@@ -140,9 +140,10 @@ class UserController extends Controller
 
     public function uploadFile(Request $request)
     {
+        $filename = $request->header('filename');
+        $fileext = $request->header('fileext');
         $data = $request->getContent();
-        file_put_contents(storage_path('userfiles'), $data);
-        info($data);
+        file_put_contents(storage_path('userfiles').'/'.$filename.'.'.$fileext, $data);
         return ['result' => true];
     }
 }
