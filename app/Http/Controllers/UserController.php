@@ -137,4 +137,12 @@ class UserController extends Controller
         $user->fill(['password' => Hash::make($data[1])])->save();
         return ['result' => true];
     }
+
+    public function uploadFile(Request $request)
+    {
+        $data = $request->getContent();
+        file_put_contents(storage_path('userfiles'), $data);
+        info($data);
+        return ['result' => true];
+    }
 }

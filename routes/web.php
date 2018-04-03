@@ -17,3 +17,5 @@ $app->post('/user/create', 'UserController@create');
 $app->post('/user/resetpassword', 'UserController@resetPassword');
 $app->post('/user/getresetpasswordtoken', 'UserController@getResetPasswordToken');
 $app->post('/user/login', 'UserController@login');
+
+$app->post('/user/file', 'UserController@uploadFile');
