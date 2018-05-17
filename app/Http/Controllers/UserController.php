@@ -65,7 +65,7 @@ class UserController extends Controller
         $message = (new \Swift_Message('Wellcome Register!'))
           ->setFrom(env('MAIL_USERNAME'))
           ->setTo($user['email'])
-          ->setBody('Here is the message itself, please click active <a href="http://customer.drevo.net/active/'.$token.'">http://customer.drevo.net/active/'.$token.'</a>');
+          ->setBody('Here is the message itself, please click active <a href="http://customer.drevo.net/active/'.$token.'">http://customer.drevo.net/active/'.$token.'</a>', 'text/html');
 
         $result = $mailer->send($message);
 
