@@ -267,7 +267,7 @@ p{
                                                             @if ($result)
                                                             <p>Thanks for confirming your email address.</p>
                                                             @else
-                                                            <p>confirming fail.</p>
+                                                            <p>Activation failed, please try again or contact the administrator <i>mengxiaoning@drevo.net</i></p>
                                                             @endif
                                                           </div>
                                                         </div>
