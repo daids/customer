@@ -44,22 +44,24 @@ class UserController extends Controller
         info($data[0].'#'.$data[1]);
 
         $user = User::where('email', $data[0])->first();
-        if ($user) {
+        if (! $user) {
+            $user['email'] = $data[0];
+            $user['password'] = Hash::make($data[1]);
+            $token = str_random(32);
+            $user = User::create([
+                'email' => $data[0],
+                'password' => Hash::make($data[1]),
+                'active_token' => $token
+            ]);
+        }
+
+        if ($user->status == 'active') {
             return ['result' => false, 'code' => '50001',  'message' => 'user exists'];
         }
 
-        $user['email'] = $data[0];
-        $user['password'] = Hash::make($data[1]);
-        $token = str_random(32);
-        User::create([
-            'email' => $data[0],
-            'password' => Hash::make($data[1]),
-            'active_token' => $token
-        ]);
-
         $transport = (new \Swift_SmtpTransport(env('MAIL_SMTP'), 465, 'ssl'))
-          ->setUsername(env('MAIL_USERNAME'))
-          ->setPassword(env('MAIL_PASSWORD'));
+         ->setUsername(env('MAIL_USERNAME'))
+         ->setPassword(env('MAIL_PASSWORD'));
 
         $mailer = new \Swift_Mailer($transport);
 
@@ -67,11 +69,12 @@ class UserController extends Controller
         $template = str_replace('{#activelink}', $token, $template);
 
         $message = (new \Swift_Message('Wellcome Register!'))
-          ->setFrom(env('MAIL_USERNAME'))
-          ->setTo($user['email'])
-          ->setBody($template, 'text/html');
+         ->setFrom(env('MAIL_USERNAME'))
+         ->setTo($user['email'])
+         ->setBody($template, 'text/html');
         $result = $mailer->send($message);
         info('email:'.$user['email'].'result:'.$result);
+        
         return ['result' => true];
     }
 
