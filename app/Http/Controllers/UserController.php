@@ -70,9 +70,8 @@ class UserController extends Controller
           ->setFrom(env('MAIL_USERNAME'))
           ->setTo($user['email'])
           ->setBody($template, 'text/html');
-
         $result = $mailer->send($message);
-
+        info('email:'.$user['email'].'result:'.$result);
         return ['result' => true];
     }
 
