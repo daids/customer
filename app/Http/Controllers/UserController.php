@@ -63,10 +63,13 @@ class UserController extends Controller
 
         $mailer = new \Swift_Mailer($transport);
 
+        $template = file_get_contents(storage_path('app').'/confirm.html');
+        $template = str_replace('{#activelink}', $token, $template);
+
         $message = (new \Swift_Message('Wellcome Register!'))
           ->setFrom(env('MAIL_USERNAME'))
           ->setTo($user['email'])
-          ->setBody('Here is the message itself, please click active <a href="http://customer.drevo.net/active/'.$token.'">http://customer.drevo.net/active/'.$token.'</a>', 'text/html');
+          ->setBody($template, 'text/html');
 
         $result = $mailer->send($message);
 
@@ -188,7 +191,7 @@ class UserController extends Controller
             'email' => $data,
             'content' => $request->getContent()
         ]);
-        
+
         return ['result' => true];
     }
 }
