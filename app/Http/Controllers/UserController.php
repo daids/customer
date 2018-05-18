@@ -57,7 +57,7 @@ class UserController extends Controller
 
         $token = $user->active_token;
 
-        if ($user->status != 'active') {
+        if ($user->status == 'active') {
             return ['result' => false, 'code' => '50001',  'message' => 'user exists'];
         }
 
