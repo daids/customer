@@ -44,10 +44,10 @@ class UserController extends Controller
         info($data[0].'#'.$data[1]);
 
         $user = User::where('email', $data[0])->first();
+        $token = str_random(32);
         if (! $user) {
             $user['email'] = $data[0];
             $user['password'] = Hash::make($data[1]);
-            $token = str_random(32);
             $user = User::create([
                 'email' => $data[0],
                 'password' => Hash::make($data[1]),
@@ -55,7 +55,9 @@ class UserController extends Controller
             ]);
         }
 
-        if ($user->status == 'active') {
+        $token = $user->active_token;
+
+        if ($user->status != 'active') {
             return ['result' => false, 'code' => '50001',  'message' => 'user exists'];
         }
 
@@ -74,7 +76,7 @@ class UserController extends Controller
          ->setBody($template, 'text/html');
         $result = $mailer->send($message);
         info('email:'.$user['email'].'result:'.$result);
-        
+
         return ['result' => true];
     }
 
