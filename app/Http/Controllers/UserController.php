@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Cache;
 use Hash;
 use App\User;
+use App\Feedback;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -191,10 +192,11 @@ class UserController extends Controller
         if (! Hash::check($data[1], $user['password'])) {
             return ['result' => false];
         }
-
-        $filename = $request->header('filename');
-        $data = $request->getContent();
-        file_put_contents(storage_path('feedback').'/'.$filename, $data);
+        
+        Feedback::create([
+            'email' => $user->email,
+            'content' => $request->getContent()
+        ]);
         return ['result' => true];
     }
 }
