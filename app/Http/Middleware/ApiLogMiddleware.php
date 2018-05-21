@@ -6,7 +6,7 @@ use Closure;
 use App\ApiLog;
 use Symfony\Component\HttpFoundation\Response;
 
-class ApiLog
+class ApiLogMiddleware
 {
     public function handle($request, Closure $next)
     {
