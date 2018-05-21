@@ -23,6 +23,6 @@ $app->get('/user/file/{name}', 'UserController@file');
 
 $app->post('/software/feedback', 'UserController@feedback');
 
-$app->group(['middleware' => 'log.api'], function () use ($app) {
+$app->group(['middleware' => 'api.log'], function () use ($app) {
     $app->get('/test', 'UserController@test');
 });
