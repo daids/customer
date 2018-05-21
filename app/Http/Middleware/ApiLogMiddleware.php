@@ -11,6 +11,7 @@ class ApiLogMiddleware
     public function handle($request, Closure $next)
     {
         $url = $request->url();
+        $ip = $request->ip();
         $startTime = microtime(true);
         $response = $next($request);
         $time = microtime(true) - $startTime;
@@ -23,7 +24,8 @@ class ApiLogMiddleware
         ApiLog::create([
             'url' => $url,
             'time' => $time,
-            'code' => $code
+            'code' => $code,
+            'ip' => $ip
         ]);
 
         return $response;
