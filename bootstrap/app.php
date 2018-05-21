@@ -66,7 +66,7 @@ $app->singleton(
 // ]);
 
 $app->routeMiddleware([
-     'api' => App\Http\Middleware\ApiLog::class,
+     'api.log' => App\Http\Middleware\ApiLog::class,
 ]);
 
 /*
