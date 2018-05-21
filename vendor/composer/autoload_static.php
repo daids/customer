@@ -81,10 +81,6 @@ class ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b
             'FastRoute\\' => 10,
             'Faker\\' => 6,
         ),
-        'E' => 
-        array (
-            'Egulias\\EmailValidator\\' => 23,
-        ),
         'D' => 
         array (
             'Dotenv\\' => 7,
@@ -94,7 +90,6 @@ class ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b
         'C' => 
         array (
             'Cron\\' => 5,
-            'Carbon\\' => 7,
         ),
         'A' => 
         array (
@@ -261,10 +256,6 @@ class ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
-        'Egulias\\EmailValidator\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
-        ),
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
@@ -281,14 +272,14 @@ class ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b
         array (
             0 => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron',
         ),
-        'Carbon\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
     );
 
     public static $prefixesPsr0 = array (
@@ -308,10 +299,6 @@ class ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b
         ),
         'D' => 
         array (
-            'Doctrine\\Common\\Lexer\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
-            ),
             'Doctrine\\Common\\Inflector\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/inflector/lib',
@@ -866,6 +853,7 @@ class ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitce9d05c7ad98a2f85eb0803e9fc3b94b::$classMap;
 

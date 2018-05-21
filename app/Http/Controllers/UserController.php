@@ -198,4 +198,9 @@ class UserController extends Controller
 
         return ['result' => true];
     }
+
+    public function test()
+    {
+        return '1';
+    }
 }
