@@ -146,6 +146,23 @@ class UserController extends Controller
         return ['result' => true];
     }
 
+    public function changePassword(Request $request)
+    {
+        $data = $request->getContent();
+        $key = env('DREVO_KEY');
+        $data = \openssl_decrypt(base64_decode(trim($data)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+        $data = explode('#', $data);
+        $user = User::where('email', $data[0])->first();
+        if (! $user) {
+            return ['result' => false, 'message' => 'not found user'];
+        }
+        if (! Hash::check($data[1], $user['password'])) {
+            return ['result' => false, 'message' => 'old password error'];
+        }
+        $user->update(['password' => Hash::make($data[2])]);
+        return ['result' => true];
+    }
+
     public function uploadFile(Request $request)
     {
         $token = $request->header('token');

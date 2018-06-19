@@ -17,6 +17,7 @@ $app->group(['middleware' => 'api.log'], function () use ($app) {
     $app->get('/active/{code}', 'UserController@active');
     $app->post('/user/create', 'UserController@create');
     $app->post('/user/resetpassword', 'UserController@resetPassword');
+    $app->post('/user/changepassword', 'UserController@changePassword');
     $app->post('/user/getresetpasswordtoken', 'UserController@getResetPasswordToken');
     $app->post('/user/login', 'UserController@login');
 
