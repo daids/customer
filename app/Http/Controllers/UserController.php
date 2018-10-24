@@ -70,7 +70,7 @@ class UserController extends Controller
         $template = file_get_contents(storage_path('app').'/confirm.html');
         $template = str_replace('{#activelink}', $token, $template);
 
-        $message = (new \Swift_Message('Wellcome Register!'))
+        $message = (new \Swift_Message('Welcome Register!'))
          ->setFrom(env('MAIL_USERNAME'))
          ->setTo($user['email'])
          ->setBody($template, 'text/html');
