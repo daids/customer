@@ -6,6 +6,7 @@ use Cache;
 use Hash;
 use App\User;
 use App\Feedback;
+use App\UserSoftwareInfo;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -213,6 +214,23 @@ class UserController extends Controller
             'content' => $request->getContent()
         ]);
 
+        return ['result' => true];
+    }
+
+    public function softwareInfo(Request $request)
+    {
+        $token = $request->header('token');
+        $key = env('DREVO_KEY');
+        $data = \openssl_decrypt(base64_decode(trim($token)), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+
+        $data = explode('#', $data);
+
+        UserSoftwareInfo::create([
+            'email' => $data[0],
+            'software_version' => $data[1],
+            'firmware_version' => $data[2],
+            'system_version' => $data[3]
+        ]);
         return ['result' => true];
     }
 
