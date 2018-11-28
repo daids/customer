@@ -25,4 +25,5 @@ $app->group(['middleware' => 'api.log'], function () use ($app) {
     $app->get('/user/file/{name}', 'UserController@file');
     
     $app->post('/software/feedback', 'UserController@feedback');
+    $app->post('/software/info', 'UserController@softwareInfo');
 });
