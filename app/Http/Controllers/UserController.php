@@ -199,8 +199,11 @@ class UserController extends Controller
         if (! Hash::check($data[1], $user['password'])) {
             return ['result' => false];
         }
-
-        return response()->download(storage_path('userfiles').'/'.$filename);
+        $userfile = storage_path('userfiles').'/'.$filename;
+        if (! file_exists($userfile)) {
+            return ['result' => false];
+        }
+        return response()->download($userfile);
     }
 
     public function feedback(Request $request)
