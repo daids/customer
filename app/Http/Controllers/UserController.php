@@ -214,6 +214,19 @@ class UserController extends Controller
             'content' => $request->getContent()
         ]);
 
+        $transport = (new \Swift_SmtpTransport(env('MAIL_SMTP'), 465, 'ssl'))
+          ->setUsername(env('MAIL_USERNAME'))
+          ->setPassword(env('MAIL_PASSWORD'));
+
+        $mailer = new \Swift_Mailer($transport);
+
+        $message = (new \Swift_Message('User Feedback!'))
+          ->setFrom(env('MAIL_USERNAME'))
+          ->setTo(env('MAIL_FEEDBACK', 'support@drevo.net'))
+          ->setBody('feedback content: '.$request->getContent());
+
+        $mailer->send($message);
+
         return ['result' => true];
     }
 
