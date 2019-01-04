@@ -229,7 +229,8 @@ class UserController extends Controller
             'email' => $data[0],
             'software_version' => $data[1],
             'firmware_version' => $data[2],
-            'system_version' => $data[3]
+            'system_version' => $data[3],
+            'ip' => $request->ip()
         ]);
         return ['result' => true];
     }
