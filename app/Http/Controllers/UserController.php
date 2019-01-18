@@ -225,7 +225,8 @@ class UserController extends Controller
 
         $message = (new \Swift_Message('User Feedback!'))
           ->setFrom(env('MAIL_USERNAME'))
-          ->setTo(env('MAIL_FEEDBACK', 'support@drevo.net'))
+          ->setSubject($data)
+          ->setTo(['feedback@drevo.net', 'support@drevo.net'])
           ->setBody('feedback content: '.$request->getContent());
 
         $mailer->send($message);
