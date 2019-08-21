@@ -41,6 +41,7 @@
               $('#result').html(data);
             }
           })
+          return false;
         })
       })
     </script>
