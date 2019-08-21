@@ -2,6 +2,7 @@
   <head>
      <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
      <script src="https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js"></script>
+     <script scr="//unpkg.com/json-highlight"></script>
   </head>
   <body>
     <form class="form-horizontal">
@@ -38,7 +39,7 @@
             type: 'POST',
             data: $('form').serialize(),
             success: function(data) {
-              $('#result').text(JSON.stringify(data, undefined, 4));
+              $('#result').text(jsonHighlight(data));
             }
           })
           return false;
