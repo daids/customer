@@ -1,8 +1,6 @@
 <html>
   <head>
      <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
-     <script src="https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js"></script>
-     <script scr="https://unpkg.com/json-highlight@0.1.2/dist/json-highlight.min.js"></script>
   </head>
   <body>
     <form class="form-horizontal">
@@ -32,6 +30,8 @@
     <div id="result">
       
     </div>
+    <script src="https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js"></script>
+    <script scr="/js/json-highlight.min.js"></script>
     <script>
       $(function(){
         $('button').click(function(){
