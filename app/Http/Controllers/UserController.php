@@ -256,4 +256,14 @@ class UserController extends Controller
     {
         return '1';
     }
+
+    public function info()
+    {
+        return view('user.info');
+    }
+
+    public function showInfo(Request $request)
+    {
+        return UserSoftwareInfo::where('email', $request->email)->first();
+    }
 }

@@ -2,3 +2,6 @@
 Homestead.json
 Homestead.yaml
 .env
+/storage
+version.txt
+git-update.php
