@@ -38,7 +38,7 @@
             type: 'POST',
             data: $('form').serialize(),
             success: function(data) {
-              $('#result').html(data);
+              $('#result').text(JSON.stringify(data, undefined, 4));
             }
           })
           return false;
