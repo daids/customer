@@ -1,6 +1,7 @@
 <html>
   <head>
      <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
+     <script src="https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js"></script>
   </head>
   <body>
     <form class="form-horizontal">
@@ -30,5 +31,18 @@
     <div id="result">
       
     </div>
+    <script>
+      $(function(){
+        $('button').click(function(){
+          $.ajax({
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function(data) {
+              $('#result').html(data);
+            }
+          })
+        })
+      })
+    </script>
   </body>
 </html>
