@@ -39,7 +39,7 @@
             type: 'POST',
             data: $('form').serialize(),
             success: function(data) {
-              $('#result').text(jsonHighlight(data));
+              $('#result').html(jsonHighlight(data));
             }
           })
           return false;
