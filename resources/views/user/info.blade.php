@@ -27,11 +27,11 @@
     </div>
     </fieldset>
     </form>
-    <div id="result">
-      
-    </div>
+    <table class="table table-striped">
+      <tbody id="result">
+      </tbody>
+    </table>
     <script src="https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js"></script>
-    <script src="//unpkg.com/json-highlight"></script>
     <script>
       $(function(){
         $('button').click(function(){
@@ -39,7 +39,11 @@
             type: 'POST',
             data: $('form').serialize(),
             success: function(data) {
-              $('#result').html(jsonHighlight(data));
+              var html;
+              $.each(data, function(i, n){
+                html += '<tr> <td>'+n.id+'</td> <td>'+n.email+'</td> <td>'+n.software_version+'</td> <td>'+n.firmware_version+'</td> <td>'+n.system_version+'</td>  <td>'+n.ip+'</td>  <td>'+n.created_at+'</td> </tr>';
+              })
+              $('#result').html(html);
             }
           })
           return false;
