@@ -264,6 +264,6 @@ class UserController extends Controller
 
     public function showInfo(Request $request)
     {
-        return UserSoftwareInfo::where('email', 'like', "%{$request->email}%")->lastest()->limit(10);
+        return UserSoftwareInfo::where('email', 'like', "%{$request->email}%")->latest()->limit(20)->get();
     }
 }
