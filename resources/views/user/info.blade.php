@@ -31,7 +31,7 @@
       
     </div>
     <script src="https://cdn.bootcss.com/jquery/2.1.2/jquery.min.js"></script>
-    <script scr="/js/json-highlight.min.js"></script>
+    <script src="//unpkg.com/json-highlight"></script>
     <script>
       $(function(){
         $('button').click(function(){
